@@ -50,20 +50,10 @@ define([
      * @param {object} object- Item to add to database.
      */
     add: function (object) {
-      var deferred = new Deferred();
-      this._db.put({
+      return this._db.put({
         _id: new Date().toISOString(),
         item: object
-      }, function (err, result) {
-        if (!err) {
-          console.log('successfully add', result);
-          deferred.resolve(result);
-        } else {
-          console.warn('error adding', err);
-          deferred.reject(err);
-        }
       });
-      return deferred.promise;
     },
 
     // public methods
@@ -76,17 +66,7 @@ define([
      * @param {doc} object - PouchDB document.
      */
     delete: function(doc) {
-      var deferred = new Deferred();
-      this._db.remove(doc, function (err, result) {
-        if (!err) {
-          console.log('successfully removed', result);
-          deferred.resolve(result);
-        } else {
-          console.warn('error removing', err);
-          deferred.reject(err);
-        }
-      });
-      return deferred.promise;
+      return this._db.remove(doc);
     },
 
     /**

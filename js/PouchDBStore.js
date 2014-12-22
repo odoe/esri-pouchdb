@@ -44,7 +44,7 @@ define([
     /**
      * @example
      *   pouchStore.add(feature).then(function(result) {
-     *     logger.debug('added my feature to indexedDB', result);
+     *     console.debug('added my feature to indexedDB', result);
      *   });
      *
      * @param {object} object- Item to add to database.
@@ -69,8 +69,8 @@ define([
     // public methods
     /**
      * @example
-     *   pouchStore.remove(id).then(function(result) {
-     *     logger.debug('added my feature to indexedDB', result);
+     *   pouchStore.delete(doc).then(function(result) {
+     *     console.debug('added my feature to indexedDB', result);
      *   });
      *
      * @param {doc} object - PouchDB document.
@@ -89,6 +89,13 @@ define([
       return deferred.promise;
     },
 
+    /**
+     * @example
+     *   pouchStore.getAll().then(function(results) {
+     *     console.debug('all my stored results', results);
+     *   });
+     *
+     */
     getAll: function () {
       var deferred = new Deferred();
       this._db.allDocs({ include_docs: true }, function (err, response) {
